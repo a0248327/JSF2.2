@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:mg="http://at.irian/mygourmet">
+
+    <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_customer}"/>
+
+    <ui:define name="content">
+        <h2>#{msgs.title_edit_customer}</h2>
+        <h:messages showDetail="true" showSummary="false"/>
+
+        <form jsf:id="form">
+            <h:panelGrid id="baseData" columns="2" columnClasses="labelColumn, elementColumn">
+                <label jsf:for="firstName">#{msgs.first_name}:</label>
+                <input type="text" jsf:id="firstName" jsf:size="30" jsf:maxlength="40"
+                       jsf:value="#{customerBean.customer.firstName}" placeholder="#{msgs.enter_first_name}"/>
+                <label jsf:for="lastName">#{msgs.last_name}:</label>
+                <input type="text" jsf:id="lastName" jsf:size="30" jsf:maxlength="40"
+                       jsf:value="#{customerBean.customer.lastName}" placeholder="#{msgs.enter_last_name}"/>
+                <label jsf:for="email">#{msgs.email}:</label>
+                <input type="email" jsf:id="email" jsf:size="30" jsf:maxlength="40"
+                       jsf:value="#{customerBean.customer.email}" placeholder="#{msgs.enter_email}"/>
+                <label jsf:for="birthday">#{msgs.birthday}:</label>
+                <input type="text" jsf:id="birthday" jsf:size="30" jsf:value="#{customerBean.customer.birthday}"
+                       placeholder="#{msgs.enter_birthday}">
+                    <f:convertDateTime pattern="dd.MM.yyyy"/>
+                    <mg:validateAge minAge="18"/>
+                </input>
+                <label jsf:for="gender">#{msgs.gender}:</label>
+                <h:selectOneRadio id="gender" required="true"
+                                  value="#{customerBean.customer.gender}">
+                    <f:selectItem itemLabel="#{msgs.gender_f}" itemValue="f"/>
+                    <f:selectItem itemLabel="#{msgs.gender_m}" itemValue="m"/>
+                </h:selectOneRadio>
+                <label jsf:for="prefCat">#{msgs.preferred_categories}:</label>
+                <select jsf:id="prefCat" jsf:value="#{customerBean.customer.preferredCategories}" multiple="multiple">
+                    <f:selectItems value="#{customerBean.categories}"/>
+                </select>
+                <label jsf:for="useCreditCard">#{msgs.use_credit_card}:</label>
+                <input type="checkbox" jsf:id="useCreditCard" jsf:value="#{customerBean.customer.useCreditCard}"
+                       jsf:valueChangeListener="#{customerBean.useCreditCardChanged}">
+                    <f:ajax render="ccData"/>
+                </input>
+            </h:panelGrid>
+            <h:panelGrid id="ccData" columns="2" columnClasses="labelColumn, elementColumn">
+                <label jsf:for="ccType" jsf:rendered="#{customerBean.customer.useCreditCard}">
+                    #{msgs.credit_card_type}:
+                </label>
+                <select jsf:id="ccType" jsf:value="#{customerBean.customer.creditCardType}"
+                        jsf:rendered="#{customerBean.customer.useCreditCard}">
+                    <f:selectItems value="#{customerBean.creditCardTypes}"/>
+                    <f:event type="javax.faces.event.PostValidateEvent" listener="#{customerBean.postValidateCCType}"/>
+                </select>
+                <label jsf:for="ccNumber" jsf:rendered="#{customerBean.customer.useCreditCard}">
+                    #{msgs.credit_card_number}:
+                </label>
+                <input type="text" jsf:id="ccNumber" jsf:value="#{customerBean.customer.creditCardNumber}"
+                       jsf:rendered="#{customerBean.customer.useCreditCard}"
+                       jsf:validator="#{customerBean.validateCreditNumber}"
+                       placeholder="#{msgs.enter_credit_card_number}"/>
+            </h:panelGrid>
+            <button jsf:id="save" jsf:action="#{customerBean.save}">#{msgs.save}</button>
+            <button jsf:id="cancel" jsf:action="/showCustomer.xhtml" jsf:immediate="true">#{msgs.cancel}</button>
+        </form>
+    </ui:define>
+
+</ui:composition>

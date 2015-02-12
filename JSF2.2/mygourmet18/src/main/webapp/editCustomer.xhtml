@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:mg="http://at.irian/mygourmet"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_customer}"/>
+
+    <ui:define name="content">
+        <h2><h:outputText value="#{msgs.title_edit_customer}"/></h2>
+        <p:messages showDetail="true" showSummary="false"/>
+        <h:form id="form">
+            <h:panelGrid id="baseData" columns="2" columnClasses="labelColumn, elementColumn">
+                <p:outputLabel for="firstName" value="#{msgs.first_name}:"/>
+                <p:inputText id="firstName" size="30" maxlength="40"
+                             value="#{customerBean.customer.firstName}"/>
+                <p:outputLabel for="lastName" value="#{msgs.last_name}:"/>
+                <p:inputText id="lastName" size="30" maxlength="40"
+                             value="#{customerBean.customer.lastName}"/>
+                <p:outputLabel for="email" value="#{msgs.email}:"/>
+                <p:inputText id="email" size="30" maxlength="40"
+                             value="#{customerBean.customer.email}"/>
+                <p:outputLabel for="birthday" value="#{msgs.birthday}:"/>
+                <p:calendar id="birthday" value="#{customerBean.customer.birthday}" mode="popup" showOn="button"
+                            navigator="true" pattern="dd.MM.yyyy">
+                    <mg:validateAge minAge="18"/>
+                </p:calendar>
+                <p:outputLabel for="gender" value="#{msgs.gender}:"/>
+                <p:selectOneRadio id="gender" required="true"
+                                  value="#{customerBean.customer.gender}">
+                    <f:selectItem itemLabel="#{msgs.gender_f}" itemValue="f"/>
+                    <f:selectItem itemLabel="#{msgs.gender_m}" itemValue="m"/>
+                </p:selectOneRadio>
+                <p:outputLabel for="prefCat" value="#{msgs.preferred_categories}:"/>
+                <p:selectManyMenu id="prefCat" value="#{customerBean.customer.preferredCategories}">
+                    <f:selectItems value="#{customerBean.categories}"/>
+                </p:selectManyMenu>
+                <p:outputLabel for="useCreditCard" value="#{msgs.use_credit_card}:"/>
+                <p:selectBooleanCheckbox id="useCreditCard" value="#{customerBean.customer.useCreditCard}"
+                                         valueChangeListener="#{customerBean.useCreditCardChanged}">
+                    <f:ajax render="ccData"/>
+                </p:selectBooleanCheckbox>
+            </h:panelGrid>
+            <h:panelGrid id="ccData" columns="2" columnClasses="labelColumn, elementColumn">
+                <p:outputLabel for="ccType" value="#{msgs.credit_card_type}:"
+                               rendered="#{customerBean.customer.useCreditCard}"/>
+                <p:selectOneListbox id="ccType" value="#{customerBean.customer.creditCardType}"
+                                    rendered="#{customerBean.customer.useCreditCard}">
+                    <f:selectItems value="#{customerBean.creditCardTypes}"/>
+                    <f:event type="javax.faces.event.PostValidateEvent"
+                             listener="#{customerBean.postValidateCCType}"/>
+                </p:selectOneListbox>
+                <p:outputLabel for="ccNumber" value="#{msgs.credit_card_number}:"
+                               rendered="#{customerBean.customer.useCreditCard}"/>
+                <p:inputText id="ccNumber" value="#{customerBean.customer.creditCardNumber}"
+                             rendered="#{customerBean.customer.useCreditCard}"
+                             validator="#{customerBean.validateCreditNumber}">
+                </p:inputText>
+            </h:panelGrid>
+            <p:commandButton id="save" action="#{customerBean.saveCustomer}" value="#{msgs.save}" ajax="false"/>
+            <p:commandButton id="cancel" value="#{msgs.cancel}" action="/showCustomer.xhtml" immediate="true"
+                             ajax="false"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

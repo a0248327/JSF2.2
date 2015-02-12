@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+            http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+        version="2.2">
+
+    <flow-definition id="login">
+        <flow-return id="login-return">
+            <from-outcome>/index</from-outcome>
+        </flow-return>
+
+        <navigation-rule>
+            <from-view-id>*</from-view-id>
+            <navigation-case>
+                <from-outcome>forgotPassword-return</from-outcome>
+                <to-view-id>/login/login.xhtml</to-view-id>
+            </navigation-case>
+        </navigation-rule>
+
+        <flow-call id="forgotPassword">
+            <flow-reference>
+                <flow-id>forgotPassword</flow-id>
+            </flow-reference>
+            <outbound-parameter>
+                <name>username</name>
+                <value>#{loginBean.username}</value>
+            </outbound-parameter>
+        </flow-call>
+    </flow-definition>
+
+</faces-config>

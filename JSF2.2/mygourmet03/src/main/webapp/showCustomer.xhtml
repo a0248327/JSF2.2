@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html">
+	<head>
+		<title>MyGourmet - Show Customer</title>
+	</head>
+	<body>
+		<h1><h:outputText value="MyGourmet"/></h1>
+		<h2><h:outputText value="Show Customer"/></h2>
+		<h:panelGrid id="grid" columns="2">
+			<h:outputText value="First Name:"/>
+			<h:outputText value="#{customer.firstName}"/>
+			<h:outputText value="Last Name:"/>
+			<h:outputText value="#{customer.lastName}"/>
+			<h:outputText value="Credit Card Type:"
+					rendered="#{customer.useCreditCard}"/>
+			<h:outputText value="#{customer.creditCardType}"
+					rendered="#{customer.useCreditCard}"/>
+			<h:outputText value="Credit Card Number:"
+					rendered="#{customer.useCreditCard}"/>
+			<h:outputText value="#{customer.creditCardNumber}"
+					rendered="#{customer.useCreditCard}"/>
+		</h:panelGrid>
+		<h:outputText value="Customer saved successfully!" />
+	</body>
+</html>

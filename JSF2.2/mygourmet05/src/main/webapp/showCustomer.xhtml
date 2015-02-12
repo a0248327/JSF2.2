@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>MyGourmet - Show Customer</title>
+    </head>
+    <body>
+        <h1><h:outputText value="MyGourmet"/></h1>
+        <h2><h:outputText value="Show Customer"/></h2>
+		<h:form id="form">
+		<h:panelGrid id="grid" columns="2">
+			<h:outputText value="First Name:" />
+			<h:outputText value="#{customerBean.customer.firstName}" />
+			<h:outputText value="Last Name:" />
+			<h:outputText value="#{customerBean.customer.lastName}" />
+			<h:outputText value="Email:" />
+			<h:outputText value="#{customerBean.customer.email}" />
+            <h:outputText value="Zip code:" />
+            <h:outputText value="#{customerBean.customer.zipCode}" />
+            <h:outputText value="City:" />
+            <h:outputText value="#{customerBean.customer.city}" />
+            <h:outputText value="Street:" />
+            <h:outputText value="#{customerBean.customer.street}" />
+			<h:outputText value="Birthday:" />
+			<h:outputText value="#{customerBean.customer.birthday}">
+				<f:convertDateTime pattern="dd.MM.yyyy"/>
+			</h:outputText>
+			<h:outputText value="Credit card type:"
+					rendered="#{customerBean.customer.useCreditCard}"/>
+			<h:outputText value="#{customerBean.selectedCreditCardType}"
+					rendered="#{customerBean.customer.useCreditCard}"/>
+			<h:outputText value="Credit card number:"
+					rendered="#{customerBean.customer.useCreditCard}"/>
+			<h:outputText value="#{customerBean.customer.creditCardNumber}"
+					rendered="#{customerBean.customer.useCreditCard}"/>
+		</h:panelGrid>
+
+		</h:form>
+	</body>
+</html>

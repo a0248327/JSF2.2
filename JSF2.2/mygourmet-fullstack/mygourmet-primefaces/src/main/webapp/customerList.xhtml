@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/META-INF/templates/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_customer_list}"/>
+
+    <ui:define name="content">
+        <h2><h:outputText value="#{msgs.title_customer_list}"/></h2>
+        <h:form id="form">
+            <h:link value="#{msgs.add_customer}" outcome="#{viewIdProvider.addCustomer}"/>
+            <p:dataTable id="customers" var="customer" value="#{customerListBean.customerList}"
+                         emptyMessage="#{msgs.customers_empty}" paginator="true" rows="10" paginatorPosition="bottom">
+                <p:column headerText="#{msgs.name}" sortBy="#{customer.fullName}">
+                    <p:commandLink value="#{customer.fullName}" action="#{customerBean.showCustomer(customer.id)}"
+                                   ajax="false"/>
+                </p:column>
+                <p:column headerText="#{msgs.email}" sortBy="#{customer.email}">
+                    <h:outputText value="#{customer.email}"/>
+                </p:column>
+                <p:column>
+                    <p:commandLink value="#{msgs.delete}" action="#{customerListBean.selectCustomer(customer)}"
+                                   oncomplete="confirmDlg.show()"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:confirmDialog id="confDelDlg" message="#{msgs.confirmDeleteMsg}"
+                             header="#{msgs.confirmDelete}" severity="alert" widgetVar="confirmDlg">
+                <p:commandButton id="confirm" value="#{msgs.yes}" action="#{customerListBean.deleteCustomer}"
+                                 oncomplete="confirmDlg.hide()" update="customers"/>
+                <p:commandButton id="decline" value="#{msgs.no}" onclick="confirmDlg.hide()" type="button"/>
+            </p:confirmDialog>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

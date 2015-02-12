@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html">
+	<head>
+		<title>MyGourmet - Edit Customer</title>
+	</head>
+	<body>
+		<h1><h:outputText value="MyGourmet"/></h1>
+		<h2><h:outputText value="Edit Customer"/></h2>
+		<h:messages showDetail="true" showSummary="false"/>
+		<h:form id="form">
+		<h:panelGrid id="grid" columns="2">
+			<h:outputLabel value="First Name:" for="firstName"/>
+			<h:inputText id="firstName" value="#{customer.firstName}"
+					required="true"/>
+			<h:outputLabel value="Last Name:" for="lastName"/>
+			<h:inputText id="lastName" value="#{customer.lastName}"
+					required="true"/>
+			<h:outputLabel value="Use Credit Card:" for="useCreditCard"/>
+			<h:selectBooleanCheckbox id="useCreditCard"
+					value="#{customer.useCreditCard}"
+					valueChangeListener="#{customer.useCreditCardChanged}"
+					immediate="true" onclick="this.form.submit()"/>
+			<h:outputLabel value="Credit Card Type:" for="ccType"
+					rendered="#{customer.useCreditCard}"/>
+			<h:inputText id="ccType" value="#{customer.creditCardType}"
+					rendered="#{customer.useCreditCard}"
+					required="#{customer.useCreditCard}"/>
+			<h:outputLabel value="Credit Card Number:" for="ccNumber"
+					rendered="#{customer.useCreditCard}"/>
+			<h:inputText id="ccNumber" value="#{customer.creditCardNumber}"
+					rendered="#{customer.useCreditCard}"
+					required="#{customer.useCreditCard}"/>
+		</h:panelGrid>
+		<h:commandButton id="save" action="#{customer.save}" value="Save"/>
+		<h:commandButton id="export" action="#{customer.export}" value="Export Text"/>
+		<h:commandButton id="cancel" value="Cancel"	action="/cancelled.xhtml" immediate="true"/>
+		</h:form>
+	</body>
+</html>

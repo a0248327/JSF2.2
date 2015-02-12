@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:mc="http://xmlns.jcp.org/jsf/composite/mygourmet">
+    <ui:define name="header">
+        <img jsf:name="images/logo.png" alt="MyGourmet-Logo"/>
+
+        <h1>#{msgs.title_main}</h1>
+        <mc:ajaxStatus style="float:right; width: 100px;"/>
+    </ui:define>
+
+    <ui:define name="left_sidebar">
+        <ui:include src="leftSideBar.xhtml"/>
+    </ui:define>
+
+    <ui:define name="footer">
+        <span style="float: left;">#{msgs.footer_left_text}</span>
+        <span style="float: right;">#{msgs.footer_right_text}</span>
+    </ui:define>
+
+</ui:composition>

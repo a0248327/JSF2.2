@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/META-INF/templates/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:mg="http://at.irian/mygourmet">
+    <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_provider_details}"/>
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="id" value="#{providerBean.id}" label="id"/>
+            <f:viewAction action="#{providerBean.loadProvider}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:messages/>
+
+        <h2><h:outputText value="#{msgs.title_provider_details}"/></h2>
+
+        <h:panelGrid columns="2">
+            <h:outputText value="#{msgs.provider_name}:"/>
+            <h:outputText value="#{providerBean.provider.name}"/>
+            <h:outputText value="#{msgs.stars}:"/>
+            <h:outputText value="#{providerBean.provider.stars}"/>
+            <h:outputText value="#{msgs.city}:"/>
+            <h:outputText value="#{providerBean.provider.address.zipCode} #{providerBean.provider.address.city}"/>
+            <h:outputText value="#{msgs.street}:"/>
+            <h:outputText value="#{providerBean.provider.address.street}"/>
+            <h:outputText value="#{msgs.categories}:"/>
+            <h:outputText value="#{providerBean.provider.categories}">
+                <mg:convertList separator=", " bundleName="msgs"/>
+            </h:outputText>
+        </h:panelGrid>
+        <h:link value="#{msgs.edit}" outcome="editProvider" includeViewParams="true"/>
+    </ui:define>
+</ui:composition>

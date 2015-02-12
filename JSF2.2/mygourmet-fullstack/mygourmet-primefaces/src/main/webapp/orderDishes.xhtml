@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:mc="http://xmlns.jcp.org/jsf/composite/mygourmet"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_dish}"/>
+
+    <ui:define name="content">
+        <h2><h:outputText value="#{msgs.title_order_dishes}: #{msgs.select_dishes}"/></h2>
+        <p:messages showDetail="true" showSummary="false"/>
+        <h:form id="form">
+            <p:dataTable value="#{orderBean.dishes}" var="dish">
+                <p:column>
+                    <h:selectBooleanCheckbox value="#{dish.selected}"/>
+                </p:column>
+                <p:column headerText="#{msgs.dish}">
+                    <h:outputText value="#{dish.dish.name}"/>
+                </p:column>
+                <p:column headerText="#{msgs.amount}">
+                    <h:inputText value="#{dish.amount}">
+                        <f:validateLongRange minimum="1"/>
+                    </h:inputText>
+                </p:column>
+            </p:dataTable>
+            <p:commandButton id="next" action="#{orderBean.gotoFinish}" value="#{msgs.next}" ajax="false"/>
+            <p:commandButton id="finish" action="#{orderBean.finish}" value="#{msgs.finish}" disabled="true"
+                             ajax="false"/>
+            <p:commandButton id="cancel" action="#{orderBean.cancel}" value="#{msgs.cancel}"
+                             immediate="true" ajax="false"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

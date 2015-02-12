@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>at.irian.jsfatwork</groupId>
+    <artifactId>mygourmet-service</artifactId>
+    <packaging>jar</packaging>
+    <name>JSF at Work - MyGourmet Fullstack (Service)</name>
+
+    <parent>
+        <groupId>at.irian.jsfatwork</groupId>
+        <artifactId>mygourmet-fullstack</artifactId>
+        <version>2.0</version>
+    </parent>
+
+    <!-- Project dependencies -->
+    <dependencies>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+        </dependency>
+
+        <!-- Geronimo JEE specifications -->
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jcdi_1.0_spec</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-atinject_1.0_spec</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_2.0_spec</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-validation_1.0_spec</artifactId>
+        </dependency>
+
+        <!-- MyFaces CODI -->
+        <dependency>
+            <groupId>org.apache.myfaces.extensions.cdi.core</groupId>
+            <artifactId>myfaces-extcdi-core-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.myfaces.extensions.cdi.core</groupId>
+            <artifactId>myfaces-extcdi-core-impl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.myfaces.extensions.cdi.modules</groupId>
+            <artifactId>myfaces-extcdi-jpa1-module-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.myfaces.extensions.cdi.modules</groupId>
+            <artifactId>myfaces-extcdi-jpa1-module-impl</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>mygourmet-service</finalName>
+        <defaultGoal>install</defaultGoal>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

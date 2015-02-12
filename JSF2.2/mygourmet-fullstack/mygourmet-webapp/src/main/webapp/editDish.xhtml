@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_dish}"/>
+    <ui:define name="content">
+        <h2><h:outputText value="#{msgs.title_edit_dish}"/></h2>
+        <h:messages showDetail="true" showSummary="false"/>
+        <h:form id="form">
+            <h:panelGrid id="grid" columns="2">
+                <h:outputLabel for="name" value="#{msgs.provider_name}:"/>
+                <h:inputText id="name" value="#{providerBean.dish.name}" size="30"/>
+                <h:outputLabel for="description" value="#{msgs.description}:"/>
+                <h:inputTextarea id="description" value="#{providerBean.dish.description}" cols="30"/>
+                <h:outputLabel for="price" value="#{msgs.price}:"/>
+                <h:inputText id="price" value="#{providerBean.dish.price}" size="30"/>
+            </h:panelGrid>
+            <h:commandButton id="save" action="#{providerBean.saveDish}" value="#{msgs.save}"/>
+            <h:commandButton id="cancel" action="#{providerBean.cancelDish}" value="#{msgs.cancel}"
+                             immediate="true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

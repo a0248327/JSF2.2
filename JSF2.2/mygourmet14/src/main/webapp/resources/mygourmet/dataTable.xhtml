@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<cc:interface>
+    <cc:attribute name="var" required="false"/>
+    <cc:attribute name="value" required="false"/>
+    <cc:attribute name="styleClass" required="false" default="mygourmet-table"/>
+    <cc:attribute name="headerClass" required="false" default="mygourmet-table-header"/>
+    <cc:attribute name="rowClasses" required="false" default="mygourmet-table-rownobg, mygourmet-table-rowbg"/>
+    <cc:attribute name="columnClasses" required="false" default="mygourmet-table-cell"/>
+    <cc:facet name="header"/>
+    <cc:facet name="footer"/>
+</cc:interface>
+
+<cc:implementation>
+    <h:outputStylesheet library="mygourmet" name="components.css"/>
+    <div id="#{cc.clientId}">
+        <h:dataTable id="table" value="#{cc.attrs.value}" styleClass="#{cc.attrs.styleClass}"
+                headerClass="#{cc.attrs.headerClass}" rowClasses="#{cc.attrs.rowClasses}" columnClasses="#{cc.attrs.columnClasses}">
+            <c:set target="#{component}" property="var" value="#{cc.attrs.var}"/>
+            <cc:insertFacet name="header"/>
+            <cc:insertChildren/>
+            <cc:insertFacet name="footer"/>
+        </h:dataTable>
+    </div>
+</cc:implementation>
+
+</ui:composition>

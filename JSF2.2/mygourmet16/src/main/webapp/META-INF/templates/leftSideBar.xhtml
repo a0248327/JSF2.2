@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:mc="http://xmlns.jcp.org/jsf/composite/mygourmet">
+    <mc:panelBox id="menu">
+        <f:facet name="header">
+            <h:outputText value="#{msgs.menu_title}"/>
+        </f:facet>
+        <h:panelGrid columns="1">
+            <h:link outcome="providerList" value="#{msgs.menu_provider_list}"/>
+            <h:link outcome="showCustomer" value="#{msgs.menu_show_customer}"/>
+        </h:panelGrid>
+    </mc:panelBox>
+    <mc:panelBox id="news">
+        <f:facet name="header">
+            <h:outputText value="#{msgs.news_title}"/>
+        </f:facet>
+        <p>MyGourmet - jetzt mit Facelets und Templating</p>
+    </mc:panelBox>
+</ui:composition>

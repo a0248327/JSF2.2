@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/META-INF/templates/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:mg="http://at.irian/mygourmet"
+                xmlns:mc="http://xmlns.jcp.org/jsf/composite/mygourmet">
+
+    <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_provider_list}"/>
+
+    <ui:define name="content">
+        <h2><h:outputText value="#{msgs.title_provider_list}"/></h2>
+
+        <mc:dataTable id="providers" var="provider" value="#{providerListBean.providerList}">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{msgs.provider_name}"/>
+                </f:facet>
+                <h:link value="#{provider.name}" outcome="showProvider">
+                    <f:param name="id" value="#{provider.id}"/>
+                </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{msgs.zip_code}"/>
+                </f:facet>
+                <h:outputText value="#{provider.address.zipCode}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="#{msgs.categories}"/>
+                </f:facet>
+                <h:outputText value="#{provider.categories}">
+                    <mg:convertList separator=", " bundleName="msgs"/>
+                </h:outputText>
+            </h:column>
+        </mc:dataTable>
+    </ui:define>
+
+</ui:composition>

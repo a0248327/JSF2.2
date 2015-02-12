@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:decorate template="/META-INF/templates/sideBox.xhtml">
+        <ui:param name="title" value="#{msgs.menu_title}"/>
+        <h:panelGrid columns="1">
+            <h:link outcome="/views/provider/providerList" value="#{msgs.menu_provider_list}"/>
+            <h:link outcome="/views/customer/showCustomer" value="#{msgs.menu_show_customer}"/>
+        </h:panelGrid>
+    </ui:decorate>
+
+    <ui:decorate template="/META-INF/templates/sideBox.xhtml">
+        <ui:param name="title" value="#{msgs.news_title}"/>
+        <p>MyGourmet - jetzt mit Facelets und Templating</p>
+    </ui:decorate>
+</ui:composition>

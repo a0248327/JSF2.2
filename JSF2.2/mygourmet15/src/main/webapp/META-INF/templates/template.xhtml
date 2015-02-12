@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<ui:insert name="metadata"/>
+<head jsf:id="head">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>#{title}</title>
+    <link type="text/css" rel="stylesheet" jsf:name="styles/mygourmet.css"/>
+</head>
+<body jsf:id="body">
+    <script type="text/javascript" jsf:library="javax.faces" jsf:name="jsf.js" jsf:target="head"/>
+
+    <div id="container">
+        <div id="header">
+            <ui:insert name="header">Default header</ui:insert>
+        </div>
+
+        <div id="left_sidebar">
+            <ui:insert name="left_sidebar">Default left side bar</ui:insert>
+        </div>
+
+        <div id="content">
+            <ui:insert name="content">Default content</ui:insert>
+        </div>
+
+        <div id="footer">
+            <ui:insert name="footer">Default footer</ui:insert>
+        </div>
+    </div>
+</body>
+</html>

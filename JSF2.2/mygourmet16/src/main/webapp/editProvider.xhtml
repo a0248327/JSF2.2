@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:mg="http://at.irian/mygourmet">
+    <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_provider}"/>
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="id" value="#{providerBean.id}" label="id"/>
+            <f:viewAction action="#{providerBean.loadProvider}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <h2><h:outputText value="#{msgs.title_edit_provider}"/></h2>
+        <h:messages showDetail="true" showSummary="false"/>
+        <h:form id="form">
+            <h:panelGrid id="grid" columns="2">
+                <h:outputLabel for="name" value="#{msgs.provider_name}:"/>
+                <h:inputText id="name" size="30" maxlength="40"
+                             value="#{providerBean.provider.name}"/>
+                <h:outputLabel for="stars" value="#{msgs.stars}:"/>
+                <mg:inputSpinner id="stars" value="#{providerBean.provider.stars}" inc="1"/>
+                <h:outputLabel for="zipCode" value="#{msgs.zip_code}:"/>
+                <h:inputText id="zipCode" size="30"
+                             value="#{providerBean.provider.address.zipCode}">
+                    <mg:convertZipCode/>
+                </h:inputText>
+                <h:outputLabel for="city" value="#{msgs.city}:"/>
+                <h:inputText id="city" size="30" maxlength="40"
+                             value="#{providerBean.provider.address.city}"/>
+                <h:outputLabel for="street" value="#{msgs.street}:"/>
+                <h:inputText id="street" size="30" maxlength="40"
+                             value="#{providerBean.provider.address.street}"/>
+                <h:outputLabel for="country" value="#{msgs.country}:"/>
+                <h:inputText id="country" size="30" maxlength="40"
+                             value="#{providerBean.provider.address.country}"/>
+            </h:panelGrid>
+            <h:commandButton id="save" action="#{providerBean.save}" value="#{msgs.save}"/>
+            <h:commandButton id="cancel" value="#{msgs.cancel}" immediate="true"
+                             action="showProvider?faces-redirect=true&amp;includeViewParams=true"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

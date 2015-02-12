@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<faces-config version="2.2"
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+	<!-- Settings for application -->
+	<application>
+		<locale-config>
+			<default-locale>de</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+		<message-bundle>at.irian.jsfatwork.messages</message-bundle>
+		<resource-bundle>
+			<base-name>at.irian.jsfatwork.messages</base-name>
+			<var>msgs</var>
+		</resource-bundle>
+        <system-event-listener>
+            <system-event-listener-class>
+                at.irian.jsfatwork.gui.jsf.application.ApplicationStartupListener
+            </system-event-listener-class>
+            <!--suppress FacesModelInspection -->
+            <system-event-class>javax.faces.event.PostConstructApplicationEvent</system-event-class>
+        </system-event-listener>
+    </application>
+
+	<!-- PhaseListener -->
+	<lifecycle>
+		<phase-listener>
+            at.irian.jsfatwork.gui.jsf.application.DebugPhaseListener
+        </phase-listener>
+		<phase-listener>
+            at.irian.jsfatwork.gui.jsf.application.ParameterPhaseListener
+        </phase-listener>
+	</lifecycle>
+
+</faces-config>

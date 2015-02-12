@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="/META-INF/templates/customerTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:mg="http://at.irian/mygourmet"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_address}"/>
+
+    <ui:define name="content">
+        <h2><h:outputText value="#{msgs.title_edit_address}"/></h2>
+        <p:messages showDetail="true" showSummary="false"/>
+        <h:form id="form">
+            <h:panelGrid id="grid" columns="2">
+                <p:outputLabel for="zipCode" value="#{msgs.zip_code}:"/>
+                <p:inputText id="zipCode" size="30"
+                             value="#{customerBean.address.zipCode}">
+                    <mg:convertZipCode/>
+                </p:inputText>
+                <p:outputLabel for="city" value="#{msgs.city}:"/>
+                <p:inputText id="city" size="30" maxlength="40"
+                             value="#{customerBean.address.city}"/>
+                <p:outputLabel for="street" value="#{msgs.street}:"/>
+                <p:inputText id="street" size="30" maxlength="40"
+                             value="#{customerBean.address.street}"/>
+                <p:outputLabel for="country" value="#{msgs.country}:"/>
+                <p:inputText id="country" size="30" maxlength="40"
+                             value="#{customerBean.address.country}"/>
+            </h:panelGrid>
+            <p:commandButton id="save" action="#{customerBean.saveAddress}" value="#{msgs.save}" ajax="false"/>
+            <p:commandButton id="cancel" action="#{customerBean.cancelAddress}" value="#{msgs.cancel}"
+                             immediate="true" ajax="false"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
